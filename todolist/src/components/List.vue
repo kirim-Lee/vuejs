@@ -1,47 +1,30 @@
 <template>
 	<ul>
-		<li v-for="(a,index) in todolist" :class="checked(a.done)" v-on:click="TodoToggle(index)">
+		<li v-for="(a,index) in todolist" :class="checked(a.done)" v-on:click="doneToggle({index:index})">
 			{{a.todo}}
 			<span v-if="a.done">(완료)</span>
-			<span class="close" v-on:click.stop="deleteTodo(index)">x</span>
+			<span class="close" v-on:click.stop="deleteTodo({index:index})">x</span>
 		</li>
 	</ul>
 </template>
 
 <script>
-	import eventBus from './EventBus.vue';
+	//import eventBus from './EventBus.vue';
+	import Constant from '../constant';
+	import {mapState,mapActions} from 'vuex';
+	import _ from 'lodash';
+
 	export default {
 		name: "list",
-		data:function(){
-			return {
-				todolist:[
-					{todo:"영화보기",done:false},
-					{todo:"주말 산책",done:true},
-					{todo:"ES6 학습",done:false},
-					{todo:"잠실 야구장",done:false}
-				]
-			}
-		},
-		created:function(){
-			eventBus.$on('add-todo',this.addTodoList);
-		},
-		methods:{
-			checked:function(done){
-				if(done) return {checked:true};
-				else return {checked:false};
-			},
-			TodoToggle:function(index){
-				this.todolist[index].done = !this.todolist[index].done;
-			},
-			deleteTodo:function(index){
-				this.todolist.splice(index,1);
-			},
-			addTodoList:function(todo){
-				if(todo!==""){
-					this.todolist.push({todo:todo,done:false});
+		computed:mapState(['todolist']),
+		methods:_.extend({
+				checked: function (done) {
+					if (done) return {checked: true};
+					else return {checked: false};
 				}
-			}
-		}
+			},
+			mapActions([Constant.DONE_TOGGLE,Constant.DELETE_TODO])
+		)
 	}
 </script>
 

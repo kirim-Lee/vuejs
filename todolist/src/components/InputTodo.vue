@@ -6,7 +6,8 @@
 </template>
 
 <script>
-	import eventBus from './EventBus.vue';
+	//import eventBus from './EventBus.vue';
+	import Constant from '../constant';
 	export default {
 		name: "input-todo",
 		data:function(){
@@ -14,7 +15,7 @@
 		},
 		methods:{
 			addTodo:function(){
-				eventBus.$emit('add-todo',this.todo);
+				this.$store.dispatch(Constant.ADD_TODO,{todo:this.todo});
 				this.todo='';
 			}
 		}
