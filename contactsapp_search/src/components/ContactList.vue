@@ -10,9 +10,6 @@
 			</tr>
 			</thead>
 			<tbody id="contacts">
-			<tr v-show="contacts.status==='fail'">
-				<td colspan="4">{{contacts.message}}</td>
-			</tr>
 			<tr v-for="contact in contacts">
 				<td>{{contact.no}}</td>
 				<td>{{contact.name}}</td>
@@ -28,7 +25,11 @@
 	import {mapState} from 'vuex';
 	export default {
 		name: "contact-list",
-		computed:mapState(['contacts'])
+		computed:{
+			contacts:function(){
+				return this.$store.state.m1.contacts
+			}
+		}
 	}
 </script>
 
