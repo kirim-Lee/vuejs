@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<p class="addnew">
-			<button class="btn btn-primary" @click="addContact()">새로운 연락처 추가하기</button>
+			<button class="btn btn-primary" @click="addContact">새로운 연락처 추가하기</button>
 		</p>
 		<div id="example">
 			<table id="list" class="table table-striped table-bordered table-hover">
@@ -15,7 +15,7 @@
 					<td>{{contact.name}}</td>
 					<td>{{contact.tel}}</td>
 					<td>{{contact.address}}</td>
-					<td><img class="thubnail" :src="contact.photo" @click="editPhoto(contact.no)" /></td>
+					<td><img class="thumbnail" :src="contact.photo" @click="editPhoto(contact.no)" /></td>
 					<td>
 						<button class="btn btn-primary" @click="editContact(contact.no)">편집</button>
 						<button class="btn btn-primay" @click="deleteContact(contact.no)">삭제</button>
@@ -27,23 +27,26 @@
 	</div>
 </template>
 <script>
-	import eventBus from '../eventBus.js';
+	//import eventBus from '../eventBus.js';
+	import Constant from '../constant.js';
+	import {mapState} from 'vuex';
+
 	export default{
 		name:'contact-list',
-		props:['contactlist'],
+		computed:mapState(['contactlist']),
 		methods:{
 			addContact:function(){
-				eventBus.$emit('addContactForm');
+				this.$store.dispatch(Constant.ADD_CONTACT_FORM);
 			},
 			editPhoto:function(no){
-				eventBus.$emit('editPhoto',no);
+				this.$store.dispatch(Constant.EDIT_PHOTO_FORM,{no:no});
 			},
 			editContact:function(no){
-				eventBus.$emit('editContactForm',no);
+				this.$store.dispatch(Constant.EDIT_CONTACT_FORM,{no:no});
 			},
 			deleteContact:function(no){
 				if(confirm('정말로삭제하시겠습니까?')===true){
-					eventBus.$emit('deleteContact',no);
+					this.$store.dispatch(Constant.DELETE_CONTACT,{no:no});
 				}
 			}
 		}

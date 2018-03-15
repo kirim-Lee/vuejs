@@ -16,7 +16,7 @@
 				</div>
 				<div>
 					<div>&nbsp;</div>
-					<input type="button" class="btn btn-primary" value="변경" @click="photoSubmit()" />
+					<input type="button" class="btn btn-primary" value="변경" @click="photoSubmit" />
 					<input type="button" class="btn btn-primary" value="취소" @click="cancelEvent" />
 				</div>
 			</form>
@@ -24,17 +24,18 @@
 	</div>
 </template>
 <script>
-	import eventBus from '../eventBus.js';
+	import Constant from '../constant.js';
+	import {mapState} from 'vuex';
     export default{
         name:'update-photo',
-		props:['contact'],
+		computed:mapState(['contact']),
 		methods:{
 			photoSubmit:function(){
 				var file=this.$refs.photofile.files[0];
-				eventBus.$emit('updatePhoto',this.contact.no,file);
+				this.$store.dispatch(Constant.UPDATE_PHOTO,{no:this.contact.no,file:file});
 			},
 			cancelEvent:function(){
-				eventBus.$emit('cancel');
+				this.$store.dispatch(Constant.CANCEL_FORM);
 			}
 		}
     }

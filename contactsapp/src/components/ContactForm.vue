@@ -28,19 +28,13 @@
 </template>
 
 <script>
-	import eventBus from '../eventBus.js';
+	import Constant from '../constant.js';
+	import {mapState} from 'vuex';
+	import _ from 'lodash';
+
 	export default {
 		name: "contact-form",
-		props:{
-			mode:{type:String,default:'add'},
-			contact:{
-				type:Object,
-				default:function(){
-					return {no:0,name:'',tel:'',address:'',photo:''};
-				}
-			}
-		},
-		computed:{
+		computed:_.extend({
 			btnText:function(){
 				if(this.mode!='update') return "추가";
 				else return "수정";
@@ -49,20 +43,20 @@
 				if(this.mode!='update') return '새로운 연락처 추가';
 				else return '연락처 변경';
 			}
-		},
+		},mapState(['contact','mode'])),
 		mounted:function(){
 			this.$refs.name.focus();
 		},
 		methods:{
 			submitEvent:function(){
 				if(this.mode!='update'){
-					eventBus.$emit('addSubmit',this.contact);
+					this.$store.dispatch(Constant.ADD_CONTACT);
 				}else{
-					eventBus.$emit('updateSubmit',this.contact);
+					this.$store.dispatch(Constant.UPDATE_CONTACT,{contact:this.contact});
 				}
 			},
 			cancelEvent:function(){
-				eventBus.$emit('cancel');
+				this.$store.dispatch(Constant.CANCEL_FORM);
 			}
 		}
 	}
