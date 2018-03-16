@@ -5,13 +5,13 @@
     <nav>
       <ul>
         <li>
-          <router-link to="/home">Home</router-link>
+          <router-link :to="{name:'home'}">Home</router-link>
         </li>
         <li>
-          <router-link to="/about">About</router-link>
+          <router-link :to="{name:'about'}">About</router-link>
         </li>
         <li>
-          <router-link to="/contacts">Contacts</router-link>
+          <router-link :to="{name:'contacts'}">Contacts</router-link>
         </li>
       </ul>
     </nav>
@@ -26,14 +26,20 @@
   import Home from './components/Home'
   import Contacts from './components/Contact'
   import About from './components/About'
+  import ContactByNo from './components/ContactByNo'
   import VueRouter from 'vue-router'
 
   const router=new VueRouter({
       routes:[
           {path:'/',component:Home},
-          {path:'/home',component:Home},
-          {path:'/about',component:About},
-          {path:'/contacts',component:Contacts}
+          {path:'/home',name:'home',component:Home},
+          {path:'/about',component:About,name:'about'},
+          {path:'/contacts',component:Contacts,name:'contacts',
+              children:[
+				  {path:':no',component:ContactByNo,name:'contactbyno'}
+              ]
+          }
+
       ]
   });
 export default {
@@ -42,7 +48,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+  @import url("https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css");
   .header{background-color:aqua; padding:10px 0 0 0;}
   .headerText{padding:0 20px;}
   ul{list-style-type:none; margin:0; padding:0; overflow:hidden; background-color:purple;}
