@@ -27,20 +27,39 @@
   import Contacts from './components/Contact'
   import About from './components/About'
   import ContactByNo from './components/ContactByNo'
+  import NotFound from './components/NotFound'
   import VueRouter from 'vue-router'
 
   const router=new VueRouter({
+      mode:'history', //라우팅모드 //없으면 해시모드
       routes:[
           {path:'/',component:Home},
           {path:'/home',name:'home',component:Home},
           {path:'/about',component:About,name:'about'},
           {path:'/contacts',component:Contacts,name:'contacts',
               children:[
-				  {path:':no',component:ContactByNo,name:'contactbyno'}
+				  {
+				  	  path:':no',
+                      component:ContactByNo,
+                      name:'contactbyno',
+                      beforeEnter:(to,from,next)=>{
+				  	    console.log('@@ beforeEnter   전역! : ' + from.path + "-->" + to.path);
+				  	    if(from.path.startsWith("/contacts")) next();
+				  	    else next("/home");
+                      }
+				  }
               ]
-          }
-
+          },
+          {path:"*",component:NotFound}
       ]
+  });
+
+  router.beforeEach((to,from,next)=>{
+  	console.log('** beforeEach!!');
+  	next();
+  });
+  router.afterEach((to,from)=>{
+  	console.log('** afterEach!');
   });
 export default {
 	name: 'app',
