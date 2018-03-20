@@ -40,7 +40,7 @@
 		},
 		computed:{
 			contact:function(){
-				var no=this.no;
+				var no=this.$route.params.no;
 				var arr=this.contacts.filter(function(item,index){
 					return item.no==no;
 				});

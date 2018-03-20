@@ -30,6 +30,10 @@
   import NotFound from './components/NotFound'
   import VueRouter from 'vue-router'
 
+  //no속성, path속성에 라우트 정보를 부여함. /contactbyno?no=1004
+  function connectQueryToProp(route){
+  	return {no:route.query.no,path:route.path};
+  }
   const router=new VueRouter({
       mode:'history', //라우팅모드 //없으면 해시모드
       routes:[
@@ -42,7 +46,7 @@
 				  	  path:':no',
                       component:ContactByNo,
                       name:'contactbyno',
-                      props:true
+                      props:connectQueryToProp
 				  }
               ]
           },
