@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<p class="addnew">
-			<button class="btn btn-primary" @click="addContact">새로운 연락처 추가하기</button>
+			<router-link class="btn btn-primary" v-bind:to="{name:'addcontact'}">새로운 연락처 추가하기</router-link>
 		</p>
 		<div id="example">
 			<table id="list" class="table table-striped table-bordered table-hover">
@@ -24,29 +24,68 @@
 				</tbody>
 			</table>
 		</div>
+		<paginate ref="pagebuttons"
+				  :page-count="totalpage"
+				  :page-range="7"
+				  :margin-pages="3"
+				  :click-handler="pageChanged"
+				  :prev-text="'이전'"
+				  :next-text="'다음'"
+				  :container-class="'pagination'"
+				  :page-class="'page-item'">
+
+		</paginate>
+		<router-view></router-view>
 	</div>
 </template>
 <script>
 	//import eventBus from '../eventBus.js';
 	import Constant from '../constant.js';
 	import {mapState} from 'vuex';
+	import Paginate from 'vuejs-paginate';
+	import _ from 'lodash';
 
 	export default{
 		name:'contact-list',
-		computed:mapState(['contactlist']),
+		components:{Paginate},
+		computed:_.extend({
+			totalpage:function(){
+				var totalcount=this.contactlist.totalcount;
+				var pagesize=this.contactlist.pagesize;
+				return Math.floor((totalcount-1)/pagesize) +1 ;
+			}
+		},mapState(['contactlist'])),
+		mounted:function(){
+			var page = 1;
+			if(this.$route.query && this.$route.query.page){
+				page = parseInt(this.$route.query.page);
+			}
+			this.$store.dispatch(Constant.FETCH_CONTACTS,{pageno:page});
+			this.$refs.pagebuttons.selected = page -1;
+		},
+		watch:{
+			'$route':function(to,from){
+				if(to.query.page && to.query.page != this.contactlist.pageno){
+					var page = to.query.page;
+					this.$store.dispatch(Constant.FETCH_CONTACTS,{pageno:page});
+					this.$refs.pagebuttons.selected = page -1;
+				}
+			}
+		},
 		methods:{
-			addContact:function(){
-				this.$store.dispatch(Constant.ADD_CONTACT_FORM);
+			pageChanged:function(page){
+				this.$router.push({name:'contacts',query:{page:page}})
 			},
 			editPhoto:function(no){
-				this.$store.dispatch(Constant.EDIT_PHOTO_FORM,{no:no});
+				this.$router.push({name:'updatephoto',params:{no:no}})
 			},
 			editContact:function(no){
-				this.$store.dispatch(Constant.EDIT_CONTACT_FORM,{no:no});
+				this.$router.push({name:'updatecontact',params:{no:no}})
 			},
 			deleteContact:function(no){
 				if(confirm('정말로삭제하시겠습니까?')===true){
 					this.$store.dispatch(Constant.DELETE_CONTACT,{no:no});
+					this.$router.push({name:'contacts'})
 				}
 			}
 		}
