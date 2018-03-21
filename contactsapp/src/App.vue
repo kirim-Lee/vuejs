@@ -10,12 +10,17 @@
             </div>
         </div>
         <router-view></router-view>
+        <loading v-show="isloading"></loading>
     </div>
 </template>
 
 <script>
+    import Loading from './components/Loading';
+    import {mapState} from 'vuex';
     export default{
-        name:'app'
+        name:'app',
+        components:{Loading},
+        computed:mapState(['isloading'])
     }
 </script>
 

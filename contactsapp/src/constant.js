@@ -4,6 +4,7 @@ export default{
 	UPDATE_CONTACT:'updateContact', //연락처수정
 	DELETE_CONTACT:'deleteContact', //연락처삭제
 	UPDATE_PHOTO:'updatePhoto', //사진수정
+	CHANGE_ISLOADING:'changeIsLoading',
 	FETCH_CONTACT_ONE:'fetchContactOne', //
 	INITIALIZE_CONTACT_ONE:'initializeContactOne' //
 }
