@@ -1,11 +1,11 @@
 <template>
-	<ul>
-		<li v-for="(a,index) in todolist" :class="checked(a.done)" v-on:click="doneToggle({index:index})">
+	<transition-group name="list" tag="ul">
+		<li v-for="(a,index) in todolist" :class="checked(a.done)" v-on:click="doneToggle({index:index})" :key="index">
 			{{a.todo}}
 			<span v-if="a.done">(완료)</span>
 			<span class="close" v-on:click.stop="deleteTodo({index:index})">x</span>
 		</li>
-	</ul>
+	</transition-group>
 </template>
 
 <script>
@@ -46,4 +46,8 @@
 	}
 	.close{position:absolute; right:0; top:0; padding:12px 16px 12px 16px;}
 	.close:hover{background-color: #f44336; color:white;}
+	.list-enter-active, .list-leave-active{ transition:all 0.2s;}
+	.list-enter, .list-leave-to{
+		opacity:0; transform:translateY(50px);
+	}
 </style>
