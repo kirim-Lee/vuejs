@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<hr class="divider" />
 		<h1>연락처 상세</h1>
 		<div>
 			<table class="detail table table-bordered">
@@ -37,6 +38,11 @@
 		created:function(){
 			var no = this.$route.params.no;
 			this.$store.commit(Constant.CHANGE_NO, { no : no })
+		},
+		beforeRouteUpdate(to,from,next){
+			var no=to.params.no;
+			this.$store.commit(Constant.CHANGE_NO,{no:no})
+			next()
 		}
 	}
 </script>

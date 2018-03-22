@@ -4,8 +4,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const _6c4e9766 = () => import('..\\pages\\about.vue' /* webpackChunkName: "pages_about" */).then(m => m.default || m)
-const _3f9a0142 = () => import('..\\pages\\contacts\\index.vue' /* webpackChunkName: "pages_contacts_index" */).then(m => m.default || m)
-const _560a8b2d = () => import('..\\pages\\contacts\\_no.vue' /* webpackChunkName: "pages_contacts__no" */).then(m => m.default || m)
+const _69e723c3 = () => import('..\\pages\\contacts.vue' /* webpackChunkName: "pages_contacts" */).then(m => m.default || m)
+const _32fa4cb5 = () => import('..\\pages\\contacts\\_no\\index.vue' /* webpackChunkName: "pages_contacts__no_index" */).then(m => m.default || m)
 const _2cdee1dc = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */).then(m => m.default || m)
 
 
@@ -73,13 +73,15 @@ export function createRouter () {
 		},
 		{
 			path: "/contacts",
-			component: _3f9a0142,
-			name: "contacts"
-		},
-		{
-			path: "/contacts/:no",
-			component: _560a8b2d,
-			name: "contacts-no"
+			component: _69e723c3,
+			name: "contacts",
+			children: [
+				{
+					path: ":no",
+					component: _32fa4cb5,
+					name: "contacts-no"
+				}
+			]
 		},
 		{
 			path: "/",
