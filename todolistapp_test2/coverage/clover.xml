@@ -1,12 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1521688848000" clover="3.2.0">
-  <project timestamp="1521688848001" name="All files">
-    <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="3" coveredelements="3" complexity="0" loc="2" ncloc="2" packages="1" files="1" classes="1">
-      <file name="sum.js" path="D:\node_study\vuejs\todolistapp_test2\src\sum.js">
+<coverage generated="1521695109594" clover="3.2.0">
+  <project timestamp="1521695109594" name="All files">
+    <metrics statements="22" coveredstatements="14" conditionals="8" coveredconditionals="3" methods="8" coveredmethods="4" elements="38" coveredelements="21" complexity="0" loc="22" ncloc="22" packages="3" files="7" classes="7">
+      <package name="src">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-      </file>
+        <file name="constant.js" path="D:\node_study\vuejs\todolistapp_test2\src\constant.js">
+          <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        </file>
+        <file name="sum.js" path="D:\node_study\vuejs\todolistapp_test2\src\sum.js">
+          <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <file name="List.vue" path="D:\node_study\vuejs\todolistapp_test2\src\components\List.vue">
+          <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="12" count="9" type="cond" truecount="2" falsecount="0"/>
+          <line num="13" count="7" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.store">
+        <metrics statements="15" coveredstatements="7" conditionals="6" coveredconditionals="1" methods="6" coveredmethods="2"/>
+        <file name="actions.js" path="D:\node_study\vuejs\todolistapp_test2\src\store\actions.js">
+          <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="9" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="13" count="0" type="stmt"/>
+          <line num="14" count="0" type="stmt"/>
+        </file>
+        <file name="index.js" path="D:\node_study\vuejs\todolistapp_test2\src\store\index.js">
+          <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="10" count="1" type="stmt"/>
+          <line num="12" count="1" type="stmt"/>
+        </file>
+        <file name="mutations.js" path="D:\node_study\vuejs\todolistapp_test2\src\store\mutations.js">
+          <metrics statements="6" coveredstatements="2" conditionals="6" coveredconditionals="1" methods="3" coveredmethods="1"/>
+          <line num="5" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="11" count="0" type="stmt"/>
+          <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="16" count="0" type="stmt"/>
+        </file>
+        <file name="state.js" path="D:\node_study\vuejs\todolistapp_test2\src\store\state.js">
+          <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        </file>
+      </package>
     </metrics>
   </project>
 </coverage>

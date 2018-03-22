@@ -1,11 +1,13 @@
 <template>
-	<transition-group name="list" tag="ul">
+	<!--<transition-group name="list" tag="ul">-->
+	<ul>
 		<li v-for="(a,index) in todolist" :class="checked(a.done)" v-on:click="doneToggle({index:index})" :key="index">
 			{{a.todo}}
 			<span v-if="a.done">(완료)</span>
 			<span class="close" v-on:click.stop="deleteTodo({index:index})">x</span>
 		</li>
-	</transition-group>
+	</ul>
+	<!--</transition-group>-->
 </template>
 
 <script>
